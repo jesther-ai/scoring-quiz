@@ -1,10 +1,11 @@
 "use client";
 
-import { Linkedin, Twitter, Mail, Link as LinkIcon } from "lucide-react";
+import { Linkedin, Twitter, Mail, Link as LinkIcon, Check } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 export default function ShareButtons() {
   const [shareUrl, setShareUrl] = useState("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setShareUrl(window.location.origin + "/quiz/about");
@@ -14,6 +15,8 @@ export default function ShareButtons() {
   const copyLink = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       // Silently fail if clipboard not available
     }
@@ -54,10 +57,19 @@ export default function ShareButtons() {
       <button
         onClick={copyLink}
         aria-label="Copy link"
-        className="w-9 h-9 flex items-center justify-center rounded-full border border-black/10 text-black/60 hover:text-black hover:border-black/30 transition-colors cursor-pointer"
+        className={`w-9 h-9 flex items-center justify-center rounded-full border transition-colors cursor-pointer ${
+          copied
+            ? "border-teal text-teal"
+            : "border-black/10 text-black/60 hover:text-black hover:border-black/30"
+        }`}
       >
-        <LinkIcon size={16} />
+        {copied ? <Check size={16} /> : <LinkIcon size={16} />}
       </button>
+      {copied && (
+        <span className="text-xs text-teal font-medium">
+          Copied!
+        </span>
+      )}
     </div>
   );
 }

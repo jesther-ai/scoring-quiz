@@ -35,6 +35,8 @@ export default function TabNavigation() {
 
   useEffect(() => {
     updateIndicator();
+    window.addEventListener("resize", updateIndicator);
+    return () => window.removeEventListener("resize", updateIndicator);
   }, [updateIndicator]);
 
   const setTabRef = useCallback((href: string) => (el: HTMLElement | null) => {
