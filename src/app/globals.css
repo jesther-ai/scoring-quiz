@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
+/* ─── Brand Design Tokens ─────────────────────────────────────────────────── */
+
 :root {
+  --color-teal: #23CEBC;
+  --color-teal-button: #46C4B5;
+  --color-teal-button-hover: #3aa89b;
+  --color-dark-navy: #2C2F44;
+  --color-dark-teal: #334445;
+  --color-yellow: #FECE00;
+  --color-gold-accent: #E3C440;
+  --color-cream: #FFF8D9;
+  --color-tan: #F0EAD6;
+  --color-badge-gray: #EAEAEA;
+  --color-border-gray: #e5e5e5;
+  --color-orange: #EE9133;
+
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #2C2F44;
 }
+
+/* ─── Tailwind v4 Theme Extension ─────────────────────────────────────────── */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Brand colors */
+  --color-teal: var(--color-teal);
+  --color-teal-button: var(--color-teal-button);
+  --color-teal-button-hover: var(--color-teal-button-hover);
+  --color-dark-navy: var(--color-dark-navy);
+  --color-dark-teal: var(--color-dark-teal);
+  --color-yellow: var(--color-yellow);
+  --color-gold-accent: var(--color-gold-accent);
+  --color-cream: var(--color-cream);
+  --color-tan: var(--color-tan);
+  --color-badge-gray: var(--color-badge-gray);
+  --color-border-gray: var(--color-border-gray);
+  --color-orange: var(--color-orange);
+
+  /* Font families */
+  --font-serif: "Playfair Display", "Lyon Text", Georgia, serif;
+  --font-sans: "DM Sans", "Sailec", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* ─── Tab Content Entrance Animation ─────────────────────────────────────── */
+
+@keyframes tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-tab-enter {
+  animation: tab-fade-in 0.3s ease-out;
 }
